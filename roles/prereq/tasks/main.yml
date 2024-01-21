@@ -11,6 +11,18 @@
     name: policycoreutils  # Used by install script to restore SELinux context
     update_cache: true
 
+- name: Install open-iscsi
+  when: ansible_distribution in ['Ubuntu']
+  ansible.builtin.apt:
+    name: open-iscsi
+    update_cache: true
+
+- name: Add the iscsi_tcp module module
+  modprobe:
+    name: iscsi_tcp
+    state: present
+    persistent: present
+
 - name: Enable IPv4 forwarding
   ansible.posix.sysctl:
     name: net.ipv4.ip_forward
