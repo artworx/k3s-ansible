@@ -17,6 +17,12 @@
     name: open-iscsi
     update_cache: true
 
+- name: Install nfs-common
+  when: ansible_distribution in ['Ubuntu']
+  ansible.builtin.apt:
+    name: nfs-common
+    update_cache: true
+
 - name: Add the iscsi_tcp module module
   modprobe:
     name: iscsi_tcp
